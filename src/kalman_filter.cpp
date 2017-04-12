@@ -22,6 +22,10 @@ void KalmanFilter::Predict() {
   TODO:
     * predict the state
   */
+    
+  x_ = F_ * x_;
+  MatrixXd F_T = F_.transpose();
+  P_ = F_ * P_ * F_T + Q_
 }
 
 void KalmanFilter::Update(const VectorXd &z) {
