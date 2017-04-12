@@ -37,6 +37,31 @@ FusionEKF::FusionEKF() {
     * Set the process and measurement noises
   */
 
+  //measurement matrix - laser
+  H_laser_ << 1, 0, 0, 0,
+              0, 1, 0, 0;
+
+  //initialize kalman-filter class matrices (if required at this point)
+  //initialize state vector
+  ekf_.x_ = VectorXd(4);
+
+  //initialize state covariance matrix
+  ekf_.P_ = MatrixXd(4,4);
+  ekf_.P_ << 1, 0,    0, 0,
+             0, 1,    0, 0,
+             0, 0, 1000, 0,
+             0, 0,    0, 1000;
+
+  //initialize state transisition matrix with initial dt = 0
+  ekf_.F_ = MatrixXd(4, 4);
+  ekf_.F_ << 1, 0, 0, 0,
+             0, 1, 0, 0,
+             0, 0, 1, 0,
+             0, 0, 0, 1;
+
+  //noise values
+  float noise_ax = 9;
+  float noise_ay = 9;
 
 }
 
